@@ -12,9 +12,11 @@ import com.example.aboutmeapp.databinding.ActivityMainBinding
 //I did it  writing the xml because idk
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private val myName: MyName = MyName("Bienvenido!")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= DataBindingUtil.setContentView(this,R.layout.activity_main)
+        binding.myName= myName
 
         binding.doneButton.setOnClickListener(){
             displayName(binding.doneButton) }
@@ -22,7 +24,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun displayName(view: View) {
         binding.apply{
-        nameText.text = nameEt.text
+        myName?.nickname = nameEt.text.toString()
+        invalidateAll()
         nameEt.visibility= View.GONE
         view.visibility = View.GONE
         nameText.visibility = View.VISIBLE}
